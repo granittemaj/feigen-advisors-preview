@@ -409,3 +409,44 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset
   .reg__outlet{font-size:16px}
   .reg__date{text-align:left}
 }
+
+/* =============================================================
+   NEWS — FEATURED & CARDS (treatment B)
+   ============================================================= */
+.nx{max-width:1180px;margin:0 auto;padding:0 var(--pad-desktop)}
+@media(max-width:1023px){.nx{padding:0 var(--pad-tablet)}}
+@media(max-width:767px){.nx{padding:0 var(--pad-mobile)}}
+
+.nx__feat{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.62fr);gap:60px;
+  align-items:center;padding-bottom:clamp(38px,5vh,54px);
+  border-bottom:1px solid var(--ink-14);margin-bottom:clamp(38px,5vh,54px)}
+.nx__kick{font-family:var(--sans);font-size:10.5px;font-weight:600;letter-spacing:2.6px;
+  text-transform:uppercase;color:var(--red);margin:0 0 20px}
+.nx__feat h2{font-family:var(--serif);font-weight:300;font-size:clamp(30px,4vw,52px);
+  line-height:1.14;letter-spacing:-.01em;margin:0;text-wrap:pretty}
+.nx__feat h2 a{text-decoration:none;transition:color .3s var(--ease)}
+.nx__feat h2 a:hover{color:var(--red)}
+
+/* The read-through card carries the masthead and the action. It deliberately
+   holds no excerpt: quoting an article we do not have the text of would mean
+   inventing words and attributing them to a real publication. */
+.nx__card{background:#fff;border:1px solid var(--ink-08);padding:36px}
+.nx__card .paper{font-family:var(--serif);font-size:clamp(22px,2.4vw,30px);line-height:1.2;
+  display:block;margin-bottom:10px}
+.nx__card .desk{font-family:var(--sans);font-size:11.5px;letter-spacing:1.8px;text-transform:uppercase;
+  color:var(--grey);display:block;margin-bottom:26px}
+@media(max-width:900px){.nx__feat{grid-template-columns:1fr;gap:30px}}
+
+.nx__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:38px 30px}
+.nx__grid a{display:block;text-decoration:none;border-top:1px solid var(--ink-14);padding-top:20px;
+  transition:border-top-color .35s var(--ease),padding-left .35s var(--ease)}
+.nx__grid a:hover{border-top-color:var(--red);padding-left:8px}
+.nx__grid .paper{display:block;font-family:var(--sans);font-size:10.5px;font-weight:600;
+  letter-spacing:2.2px;text-transform:uppercase;color:var(--grey);margin-bottom:14px}
+.nx__grid h3{font-family:var(--serif);font-weight:400;font-size:21px;line-height:1.32;margin:0 0 16px;
+  transition:color .3s var(--ease);text-wrap:pretty}
+.nx__grid a:hover h3{color:var(--red)}
+.nx__grid .when{font-family:var(--sans);font-size:11px;letter-spacing:1.6px;
+  text-transform:uppercase;color:var(--grey)}
+@media(max-width:900px){.nx__grid{grid-template-columns:repeat(2,1fr);gap:28px 22px}}
+@media(max-width:560px){.nx__grid{grid-template-columns:1fr}}

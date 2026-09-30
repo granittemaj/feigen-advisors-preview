@@ -459,3 +459,23 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset
   .roster .tm__photo{flex:0 0 64px;width:64px;max-width:64px;height:80px}
   .roster .tm__bio{padding-left:0}
 }
+
+/* =============================================================
+   MOBILE DRAWER
+   While the drawer is open the header must drop its over-the-hero
+   treatment: the drawer's background is paper, so white links on it
+   measure 1.05:1 and cannot be read at all.
+   ============================================================= */
+.site-head.is-menu-open{background:var(--paper);border-bottom-color:var(--rule)}
+.site-head--over.is-menu-open .logo,
+.site-head--over.is-menu-open .nav a{color:var(--ink)}
+.site-head--over.is-menu-open .nav a[aria-current="page"]{color:var(--red)}
+.site-head--over.is-menu-open .nav-toggle span{background:var(--ink)}
+@media(max-width:767px){
+  /* a real tap target, and rows that read as rows */
+  .nav a{padding:15px var(--pad-mobile);font-size:12.5px}
+  .nav a + a{border-top:1px solid var(--ink-08)}
+  .nav a::after{display:none}
+  .nav-toggle{width:44px;height:44px;display:flex;flex-direction:column;
+    justify-content:center;align-items:flex-end}
+}

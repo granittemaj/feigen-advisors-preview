@@ -7,11 +7,29 @@
 
   /* ---- mobile nav ---- */
   function nav() {
-    var btn = document.querySelector('.nav-toggle'), list = document.querySelector('.nav');
+    var btn = document.querySelector('.nav-toggle'),
+        list = document.querySelector('.nav'),
+        head = document.querySelector('.site-head');
     if (!btn || !list) return;
-    btn.addEventListener('click', function () {
-      var open = list.classList.toggle('is-open');
+
+    function set(open) {
+      list.classList.toggle('is-open', open);
       btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      // Over the hero the header is transparent and its links are white. The
+      // drawer's own background is paper, so without this the open menu is
+      // white-on-white and effectively invisible.
+      if (head) head.classList.toggle('is-menu-open', open);
+    }
+
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      set(!list.classList.contains('is-open'));
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && list.classList.contains('is-open')) { set(false); btn.focus(); }
+    });
+    document.addEventListener('click', function (e) {
+      if (list.classList.contains('is-open') && !list.contains(e.target) && e.target !== btn) set(false);
     });
   }
 

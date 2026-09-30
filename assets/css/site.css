@@ -50,7 +50,13 @@ img{max-width:100%;display:block}
 a{color:inherit}
 
 /* ---- LAYOUT ------------------------------------------------- */
-.wrap{max-width:var(--content);margin:0 auto;padding:0 var(--pad-desktop)}
+/* Content shares the section heads' container so labels and body text sit on
+   the same left edge. The readable measure is set on the text itself rather
+   than by centring a narrow column, which is what left the body indented
+   ~250px from its own heading. */
+.wrap{max-width:1180px;margin:0 auto;padding:0 var(--pad-desktop)}
+.wrap .prose,.wrap .page-head p{max-width:68ch}
+.wrap .items{max-width:900px}
 /* Team is a gallery, not a reading column: the 680px measure squeezes four
    portraits to thumbnails and breaks the names across lines. */
 .wrap--wide{max-width:1180px}
@@ -150,11 +156,14 @@ h1,h2,h3{margin:0;font-weight:300}
 .chart-section{margin-top:calc(var(--space-section) * 1.5)}
 .chart-title{
   /* Left-aligned, and sharing the chart's container so their left edges agree. */
-  max-width:var(--chart);margin:0 auto var(--space-label);padding:0 var(--pad-desktop);
+  max-width:1180px;margin:0 auto var(--space-label);padding:0 var(--pad-desktop);
   font-family:var(--serif);font-size:var(--fz-title);line-height:1.3;text-align:left;
 }
-.chart-wrap{max-width:var(--chart);margin:0 auto;padding:0 var(--pad-desktop)}
-.chart-box{position:relative;height:500px}
+/* The title, the chart and the section label all share the page's left edge.
+   The chart keeps its 1040px cap — it is left-aligned inside the wider
+   container rather than centred, so capping and aligning don't fight. */
+.chart-wrap{max-width:1180px;margin:0 auto;padding:0 var(--pad-desktop)}
+.chart-box{position:relative;height:500px;max-width:var(--chart)}
 .chart-box canvas{width:100%;height:100%;display:block}
 .chart-legend{display:none;gap:22px;margin-top:16px;font-family:var(--sans);font-size:13px;color:var(--grey)}
 .chart-legend i{display:inline-block;width:14px;height:2px;margin-right:7px;vertical-align:middle}

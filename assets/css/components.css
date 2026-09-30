@@ -433,3 +433,29 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset
   text-transform:uppercase;color:var(--grey)}
 @media(max-width:900px){.nx__grid{grid-template-columns:repeat(2,1fr);gap:28px 22px}}
 @media(max-width:560px){.nx__grid{grid-template-columns:1fr}}
+
+/* =============================================================
+   TEAM — back to the original stacked format (per Anton, 2026-09-30).
+   The grid is gone; each member is a row with the portrait at the
+   left and the name, role and expander beside it.
+   ============================================================= */
+.roster{max-width:900px}
+.roster .tm{border-bottom:1px solid var(--ink-08)}
+.roster .tm:last-child{border-bottom:0}
+.roster .tm__btn{display:flex;align-items:flex-start;gap:26px;width:100%;
+  padding:calc(var(--space-item) / 2) 0;background:none;border:0;text-align:left;
+  cursor:pointer;font:inherit;color:inherit}
+.roster .tm__photo{flex:0 0 84px;width:84px;max-width:84px;height:105px;
+  object-fit:cover;object-position:50% 10%}
+.roster .tm__text{display:block;padding-top:4px}
+.roster .tm__name{display:block;font-family:var(--serif);font-size:var(--fz-title);line-height:1.2}
+.roster .tm__role{display:block;font-family:var(--sans);font-size:14px;line-height:1.45;
+  color:var(--grey);margin-top:4px}
+.roster .tm__more{display:inline-block;margin-top:10px}
+.roster .tm__bio{padding-left:110px}
+.roster .tm:hover{transform:none}
+@media(max-width:640px){
+  .roster .tm__btn{gap:16px}
+  .roster .tm__photo{flex:0 0 64px;width:64px;max-width:64px;height:80px}
+  .roster .tm__bio{padding-left:0}
+}

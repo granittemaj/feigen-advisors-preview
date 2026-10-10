@@ -559,3 +559,10 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset
 .rq__err{font-family:var(--sans);font-size:12.5px;color:var(--red);margin:0 0 14px}
 .rq__fine{font-family:var(--sans);font-size:11.5px;color:var(--grey);margin:18px 0 0}
 @media(max-width:560px){.rq__panel{padding:28px}}
+
+/* ---- section head owns the gap beneath it ----
+   Components like .voices and .contact carry their own top margin for when
+   they follow ordinary content. Under a section label that margin stacks on
+   top of the label's own, so the gap was 72px under Contact and 104px under
+   In their words against 24px everywhere else. The label owns the spacing. */
+.shead + *{margin-top:0}

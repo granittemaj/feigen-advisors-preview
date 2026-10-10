@@ -245,8 +245,49 @@
     });
   }
 
+
+  /* ---- report request dialog ----
+     Mirrors the live site's lead capture: the PDF is released after a name and
+     email, so the mockup shows that step instead of linking straight to it.
+     Submission is local to the page; nothing is sent anywhere. */
+  function reportForm() {
+    var dlg = document.getElementById('rq');
+    if (!dlg) return;
+    var form = dlg.querySelector('.rq__form'),
+        done = dlg.querySelector('.rq__done'),
+        err  = dlg.querySelector('.rq__err'),
+        last = null;
+
+    function open(trigger) {
+      last = trigger; dlg.hidden = false;
+      form.hidden = false; done.hidden = true; err.hidden = true;
+      var first = form.querySelector('input'); if (first) first.focus();
+      document.body.style.overflow = 'hidden';
+    }
+    function close() {
+      dlg.hidden = true; document.body.style.overflow = '';
+      if (last) last.focus();
+    }
+
+    [].slice.call(document.querySelectorAll('[data-report]')).forEach(function (b) {
+      b.addEventListener('click', function () { open(b); });
+    });
+    [].slice.call(dlg.querySelectorAll('[data-rq-close]')).forEach(function (x) {
+      x.addEventListener('click', close);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !dlg.hidden) close();
+    });
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email = form.querySelector('input[name=email]').value.trim();
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { err.hidden = false; return; }
+      err.hidden = true; form.hidden = true; done.hidden = false;
+    });
+  }
+
   function init() { headHeight(); stagger(); reveals(); hero(); parallax();
-                    press(); bench(); chartHover(); transitions(); }
+                    press(); bench(); chartHover(); reportForm(); transitions(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
 })();

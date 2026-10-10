@@ -479,3 +479,83 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset
   .nav-toggle{width:44px;height:44px;display:flex;flex-direction:column;
     justify-content:center;align-items:flex-end}
 }
+
+/* =============================================================
+   ROUND 3 (Anton, 2026-10-10)
+   ============================================================= */
+
+/* ---- header logo, swapping with the header's own state ---- */
+.logo{display:block;line-height:0}
+/* The wordmark is two lines, so the lockup needs real height: at 34px each
+   line of type was about 12px and unreadable. */
+.logo img{height:46px;width:auto;display:block}
+/* Scoped under .logo so these beat `.logo img{display:block}` above, which is
+   (0,1,1) and was otherwise winning and showing both variants at once. */
+.logo .logo__light{display:none}
+.site-head--over .logo .logo__light{display:block}
+.site-head--over .logo .logo__dark{display:none}
+.site-head--over.is-menu-open .logo .logo__light{display:none}
+.site-head--over.is-menu-open .logo .logo__dark{display:block}
+@media(max-width:767px){.logo img{height:34px}}
+
+/* ---- quotes: one typographic treatment for every attribution ----
+   Named and anonymous attributions were set in different families, which read
+   as an inconsistency rather than a distinction. */
+.voices__more .nm,
+.voices__more .rl,
+.voices__more figure.is-anon .rl{
+  font-family:var(--sans);font-size:12.5px;line-height:1.5;color:var(--grey);
+  font-style:normal;letter-spacing:.2px}
+.voices__more .nm{color:var(--ink);font-weight:600;margin-bottom:3px}
+
+/* The lead attribution sits on one line, one size, one family. */
+.voices__lead figcaption{display:block;margin-top:28px}
+.voices__lead .nm,.voices__lead .rl{
+  font-family:var(--serif);font-size:clamp(19px,1.9vw,23px);line-height:1.4;
+  font-weight:400;color:var(--ink);display:inline}
+.voices__lead .nm::after{content:",";margin:0;width:auto;height:auto;background:none;
+  display:inline;vertical-align:baseline}
+.voices__lead .rl{margin-left:.3em;color:var(--grey)}
+
+/* ---- contact: lines sit together, not as separate paragraphs ---- */
+.contact__line{margin:0;line-height:1.55}
+.contact__line a{text-decoration:none;border-bottom:1px solid var(--rule)}
+.contact__line a:hover{border-bottom-color:var(--ink)}
+
+/* ---- team: the original layout, circular portraits ----
+   A circle also solves the crop that was cutting Joe Fuller off at the bottom:
+   it is centred on the face rather than filling a 4:5 box. */
+.roster .tm__photo{flex:0 0 72px;width:72px;max-width:72px;height:72px;
+  border-radius:50%;object-fit:cover;object-position:50% 22%}
+.roster .tm__btn{align-items:center;gap:22px}
+.roster .tm__bio{padding-left:94px}
+@media(max-width:640px){
+  .roster .tm__photo{flex:0 0 60px;width:60px;max-width:60px;height:60px}
+  .roster .tm__bio{padding-left:0}
+}
+
+/* ---- report request dialog ---- */
+.btn--sm{padding:10px 16px;font-size:10.5px;margin-top:16px}
+.rq{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:20px}
+.rq[hidden]{display:none}
+.rq__scrim{position:absolute;inset:0;background:rgba(10,14,18,.6)}
+.rq__panel{position:relative;background:#fff;max-width:460px;width:100%;padding:40px;
+  box-shadow:0 40px 90px -40px rgba(7,30,46,.6);max-height:90vh;overflow:auto}
+.rq__x{position:absolute;top:12px;right:14px;background:none;border:0;font-size:26px;
+  line-height:1;color:var(--grey);cursor:pointer}
+.rq__kick{font-family:var(--sans);font-size:10.5px;font-weight:600;letter-spacing:2.4px;
+  text-transform:uppercase;color:var(--red);margin:0 0 12px}
+.rq__title{font-family:var(--serif);font-weight:300;font-size:30px;line-height:1.2;margin:0 0 10px}
+.rq__sub{font-family:var(--sans);font-size:14px;line-height:1.6;color:var(--grey);margin:0 0 26px}
+.rq__form label{display:block;font-family:var(--sans);font-size:11px;font-weight:600;
+  letter-spacing:1.8px;text-transform:uppercase;color:var(--grey);margin-bottom:18px}
+.rq__form input[type=text],.rq__form input[type=email]{display:block;width:100%;margin-top:8px;
+  font-family:var(--serif);font-size:17px;padding:9px 0;border:0;border-bottom:1px solid var(--rule);
+  background:none;color:var(--ink)}
+.rq__form input:focus{outline:none;border-bottom-color:var(--ink)}
+.rq__check{display:flex !important;align-items:flex-start;gap:10px;text-transform:none;
+  letter-spacing:0;font-weight:400;font-size:13px;line-height:1.5;margin-bottom:24px}
+.rq__check input{margin-top:3px}
+.rq__err{font-family:var(--sans);font-size:12.5px;color:var(--red);margin:0 0 14px}
+.rq__fine{font-family:var(--sans);font-size:11.5px;color:var(--grey);margin:18px 0 0}
+@media(max-width:560px){.rq__panel{padding:28px}}

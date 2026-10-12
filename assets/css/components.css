@@ -524,9 +524,24 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset
 
 /* ---- team: the original layout, circular portraits ----
    A circle also solves the crop that was cutting Joe Fuller off at the bottom:
-   it is centred on the face rather than filling a 4:5 box. */
+   it is centred on the face rather than filling a 4:5 box.
+
+   The source here is portraits-round, cut square with the face centred and
+   sized for a circle (tools/portraits-round.py). The 4:5 files are framed for
+   a rectangle, and a circle crops the corners off them, which left the heads
+   small and high with the mask clipping hair. Because the crop is already
+   right, object-position is plain centre and nothing has to be nudged here.
+
+   Black and white until you hover, which is how the live site treats them.
+   The transition is filter only: no transform, so nothing shifts under the
+   cursor. :focus-within covers keyboard users, who never hover. */
 .roster .tm__photo{flex:0 0 72px;width:72px;max-width:72px;height:72px;
-  border-radius:50%;object-fit:cover;object-position:50% 22%}
+  border-radius:50%;object-fit:cover;object-position:50% 50%;
+  filter:grayscale(1);transition:filter .45s ease}
+.roster .tm__btn:hover .tm__photo,
+.roster .tm__btn:focus-visible .tm__photo,
+.roster .tm.is-open .tm__photo{filter:grayscale(0)}
+@media(prefers-reduced-motion:reduce){.roster .tm__photo{transition:none}}
 .roster .tm__btn{align-items:center;gap:22px}
 .roster .tm__bio{padding-left:94px}
 @media(max-width:640px){
@@ -566,3 +581,11 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset
    top of the label's own, so the gap was 72px under Contact and 104px under
    In their words against 24px everywhere else. The label owns the spacing. */
 .shead + *{margin-top:0}
+
+/* ---- about: same measure as the team bios ----
+   About's body ran to 68ch and stopped ~250px short of where the team bios
+   end, so the two pages had visibly different right edges. Anton asked for
+   About to match Team. 900px is the roster's own width, so the right edges
+   line up exactly rather than approximately. .prose is only used on About,
+   so this is page-scoped without needing a body class. */
+.wrap .prose{max-width:900px}
